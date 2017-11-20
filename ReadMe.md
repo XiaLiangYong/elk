@@ -72,3 +72,9 @@ wget https://download.elastic.co/logstash/logstash/logstash-2.4.1.tar.gz && \
 ```
 
 ### 第四步: 环境整合
+```
+docker整合环境
+镜像已经打包做好，直接docker pull 即可
+docker-compose up -d
+
+```

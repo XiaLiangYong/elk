@@ -1,0 +1,35 @@
+version: '2'
+services:
+    elasticsearch:
+        image: alibeibei/elasticsearch:v1
+        restart: always
+        container_name: elasticsearch
+        ports:
+            - "9200:9200"
+        environment:
+              XMS: 512m
+              XMX: 512m
+              NETWORK_HOST: 0.0.0.0
+              BOOTSTRAP_MEMORY_LOCK: 'false'
+              BOOTSTRAP_SYSTEM_CALL_FILTER: 'false'
+
+    kibana:
+         image: alibeibei/kibana:v1
+         restart: always
+         container_name: kibana
+         links:
+              - elasticsearch
+         ports:
+              - "5601:5601"
+         environment:
+              SERVER_HOST: 0.0.0.0
+              ES_URL: http://elasticsearch:9200
+
+    logstash:
+         image: alibeibei/logstash:v1
+         links:
+              - elasticsearch
+         volumes:
+              - /data/elk/logstash.conf:/usr/local/logstash/config/logstash-simple.conf
+         restart: always
+         container_name: logstash
