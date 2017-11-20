@@ -58,9 +58,17 @@ groupadd elsearch && \
     useradd elsearch -g elsearch -p elasticsearch && \
     chown -R elsearch:elsearch  /usr/local/elasticsearch
 #启动
+su elsearch
 /usr/local/elasticsearch/bin/elasticsearch
 ```
 ### 第三步: logstash 安装
-
+```
+cd /usr/local/src && \
+wget https://download.elastic.co/logstash/logstash/logstash-2.4.1.tar.gz && \
+     tar -xvf logstash-2.4.1.tar.gz &&\
+     mv logstash-2.4.1 /usr/local/logstash &&\
+     chmod +x /usr/local/logstash/bin/logstash && \
+     rm -rf logstash-2.4.1.tar.gz
+```
 
 ### 第四步: 环境整合
